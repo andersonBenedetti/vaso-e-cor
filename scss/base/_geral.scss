@@ -47,41 +47,6 @@ ul {
   }
 }
 
-/* DOTS */
-.swiper-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 24px;
-
-  .swiper-pagination-bullet {
-    width: 5px;
-    height: 5px;
-    background-color: $white;
-    opacity: 0.53;
-    border: none;
-    border-radius: 0;
-    transition: all 0.4s ease;
-    cursor: pointer;
-    transform: scale(1);
-
-    &:hover {
-      background-color: $white;
-      transform: scale(1.2);
-    }
-
-    &:focus {
-      outline: 2px solid $white;
-      outline-offset: 2px;
-    }
-
-    &.swiper-pagination-bullet-active {
-      width: 32px;
-      height: 5px;
-      background-color: $white;
-      opacity: 1;
-      border-radius: 0;
-      transform: scale(1.1);
-    }
-  }
+.title-section {
+  @include title-section;
 }
