@@ -16,17 +16,17 @@
       gap: 20px;
 
       .title {
-        @include title-single;
+        @include text;
       }
 
       .product-price {
         > del {
-          color: $text-promotional;
+          color: $black;
 
           > span {
             display: block;
-            @include price-promotional;
-            color: $text-promotional;
+            @include text;
+            color: $black;
           }
         }
 
@@ -35,7 +35,7 @@
 
           > span {
             display: block;
-            @include title-card-cat;
+            @include text;
             text-decoration: none;
           }
         }
@@ -72,16 +72,16 @@
         max-width: 250px;
         padding: 0 20px;
         height: 44px;
-        background-color: $green-btn;
+        background-color: $black;
         color: $white;
         border: none;
         border-radius: 30px;
-        @include text-btn;
+        @include text;
         cursor: pointer;
         transition: background-color 0.3s;
 
         &:hover {
-          background-color: $green;
+          background-color: $black;
         }
 
         &.disabled {
@@ -152,7 +152,7 @@
     padding: 50px 0;
 
     .container {
-      background-color: $background-input;
+      background-color: $black;
       border-radius: 10px;
 
       .content {
@@ -162,7 +162,7 @@
         padding: 50px;
 
         .title {
-          @include title-section;
+          @include text;
           margin-bottom: 20px;
         }
 
@@ -240,7 +240,7 @@
     padding: 50px 0;
 
     .title {
-      @include title-section;
+      @include text;
       margin-bottom: 20px;
       text-align: center;
     }

@@ -1,185 +1,147 @@
 #footer {
-  background-color: $background-input;
+  background-color: $black;
 
-  .content {
-    padding: 30px 0 20px;
+  .footer-top {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 50px;
+    align-items: center;
+    gap: 20px;
+    padding: 50px 0;
 
-    .column-1 {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .logo {
+      max-width: 140px;
 
-      .logo {
-        max-width: 135px;
-        margin-left: -12px;
+      img {
+        transition: transform 0.3s ease;
       }
 
-      p {
-        color: $text-gray;
-        line-height: 1;
-      }
-
-      .link {
-        @include link-footer;
-        color: $text-gray-two;
-        line-height: 1;
-      }
-
-      .link-number {
-        @include link-number;
-        line-height: 1;
-        color: $text-gray-two;
+      &:hover img {
+        transform: scale(1.1);
       }
     }
 
-    nav {
+    .links-social {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+
+      a {
+        width: 32px;
+        height: 32px;
+
+        img {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .footer-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding-right: 100px;
+    padding-bottom: 50px;
+
+    .footer-column {
       h3 {
         @include title-footer;
-        line-height: 1;
-        color: $text-gray-two;
-        margin-bottom: 15px;
+        color: $primaryCream;
       }
 
       ul {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 5px;
+        margin-top: 10px;
 
         a {
           display: block;
           width: max-content;
-          @include link-list;
-          line-height: 1;
+          @include text;
+          color: $primaryCream;
+          padding: 5px 0;
           position: relative;
-          overflow: hidden;
-          color: $text-gray-two;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
 
-          &::before {
+          &::after {
             content: "";
             position: absolute;
-            bottom: 0;
-            left: -1px;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, $green, $black);
-            transform: translateX(-100%);
-            transition: transform 0.4s ease-in-out;
+            left: 0;
+            bottom: 1px;
+            width: 0%;
+            height: 2px;
+            background-color: $primaryCream;
+            transition: width 0.4s ease;
           }
 
           &:hover {
-            color: $green;
-
-            &::before {
-              transform: translateX(0);
+            color: darken($primaryCream, 10%);
+            transform: translateY(-2px);
+            &::after {
+              width: 100%;
             }
           }
         }
       }
     }
 
-    .infos {
+    address {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
+      font-style: normal;
 
-      h3 {
-        @include title-footer;
-        line-height: 1;
-        color: $text-gray-two;
-      }
-
+      a,
       p {
-        @include link-footer;
-        line-height: 1;
-        color: $text-gray-two;
-      }
+        display: block;
+        width: max-content;
+        @include text;
+        color: $primaryCream;
+        opacity: 0.6;
 
-      .certificates {
-        margin-top: 10px;
-
-        p {
-          @include title-certificates;
-          line-height: 1;
+        span {
+          display: block;
+          font-size: 12px;
+          text-transform: uppercase;
           margin-bottom: 10px;
         }
-
-        > div {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 10px;
-
-          img {
-            height: 50px;
-            object-fit: contain;
-          }
-        }
       }
     }
   }
 
-  .bottom {
-    background-color: $white;
-    padding: 10px;
+  .footer-bottom {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid $border-color;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+      text-align: center;
+    }
 
     p {
-      @include text-bottom;
-      text-align: center;
+      @include text-small;
+      color: $primaryCream;
+      opacity: 0.8;
 
       a {
-        color: $black;
-      }
-    }
-  }
-}
+        color: $primaryCream;
+        text-decoration: underline;
+        transition: opacity 0.3s ease;
 
-@media (max-width: 768px) {
-  #footer {
-    .content {
-      flex-direction: column;
-
-      .column-1 {
-        align-items: center;
-
-        .logo {
-          margin: 0 auto;
-        }
-      }
-
-      nav {
-        text-align: center;
-
-        ul {
-          align-items: center;
-        }
-      }
-
-      .infos {
-        align-items: center;
-        text-align: center;
-
-        .certificates {
-          > div {
-            justify-content: center;
-          }
-        }
-      }
-    }
-
-    .bottom {
-      background-color: $white;
-
-      p {
-        @include text-bottom;
-        text-align: center;
-
-        a {
-          color: $black;
+        &:hover {
+          opacity: 0.6;
         }
       }
     }
