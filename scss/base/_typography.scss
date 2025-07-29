@@ -12,6 +12,12 @@ $font-primary: "Inter", sans-serif;
   line-height: 1;
 }
 
+@mixin text-medium {
+  font-weight: 500;
+  font-size: 1.125em;
+  line-height: 26px;
+}
+
 @mixin link-menu {
   font-size: 1em;
   font-weight: 600;
@@ -22,4 +28,39 @@ $font-primary: "Inter", sans-serif;
   font-weight: 600;
   font-size: 1em;
   line-height: 24px;
+}
+
+@mixin title-section {
+  font-weight: 600;
+  font-size: 4.375em;
+  line-height: 84px;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 2.5em;
+    line-height: 48px;
+  }
+}
+
+@mixin title-card-cat {
+  font-weight: 600;
+  font-size: 1.5em;
+  line-height: 28.8px;
+}
+
+@mixin btn-cat {
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 19.2px;
+}
+
+@mixin text-list {
+  font-weight: 600;
+  font-size: 2em;
+  line-height: 1;
+  text-transform: uppercase;
+
+  @media (max-width: 767px) {
+    font-size: 1.4375em;
+  }
 }
