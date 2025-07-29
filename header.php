@@ -38,29 +38,33 @@
         ];
         ?>
 
-        <header id="header">
+        <header id="header" role="banner">
             <div class="container">
                 <div class="content">
-                    <a href="/" class="logo">
+                    <a href="/" class="logo" aria-label="Ir para a página inicial">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.svg"
                             alt="Vaso & Cor - Voltar para página inicial" loading="lazy">
                     </a>
 
                     <div class="menu-items">
-                        <div class="menu-header" :class="{ active: activeMenu }">
-                            <button class="btn-menu" @click="activeMenu = !activeMenu" aria-label="Abrir menu"
-                                aria-expanded="false">
+                        <div class="menu-header" :class="{ active: activeMenu }" role="navigation"
+                            aria-label="Menu principal">
+                            <button class="btn-menu" @click="activeMenu = !activeMenu"
+                                :aria-expanded="activeMenu ? 'true' : 'false'" aria-controls="menu"
+                                aria-label="Abrir ou fechar menu de navegação">
                                 <span></span>
                             </button>
                             <ul class="menu-list" id="menu">
                                 <?php
-                                foreach ($menu_items as $item) {
-                                    echo '<li><a href="' . esc_url($item['url']) . '" aria-label="' . esc_html($item['label']) . '">' . esc_html($item['label']) . '</a></li>';
-                                }
-                                ?>
+                        foreach ($menu_items as $item) {
+                            echo '<li><a href="' . esc_url($item['url']) . '" aria-label="' . esc_html($item['label']) . '">' . esc_html($item['label']) . '</a></li>';
+                        }
+                        ?>
                             </ul>
                         </div>
-                        <?php echo do_shortcode('[fibosearch]'); ?>
+                        <div role="search">
+                            <?php echo do_shortcode('[fibosearch]'); ?>
+                        </div>
                     </div>
                 </div>
             </div>

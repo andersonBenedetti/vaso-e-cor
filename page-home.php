@@ -36,18 +36,11 @@
 
     <section class="products-shop">
         <div class="container">
-            <div class="top">
-                <h2>Orgânicos e fresquinhos</h2>
-                <a href="/categoria-produto/hortifruti/" class="btn desk">Ver todos os ítens</a>
-            </div>
-
             <?php if (!empty($data['hortifruti'])): ?>
                 <?php vaso_e_cor_product_list($data['hortifruti']); ?>
             <?php else: ?>
                 <p><?php _e('Nenhum produto encontrado na categoria Hortifruti.'); ?></p>
             <?php endif; ?>
-
-            <a href="/categoria-produto/hortifruti/" class="btn mbl">Ver todos os ítens</a>
         </div>
     </section>
 </main>

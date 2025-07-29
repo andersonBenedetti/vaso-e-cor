@@ -8,7 +8,7 @@
     input[type="search"].dgwt-wcas-search-input,
     input[type="search"].dgwt-wcas-search-input {
       height: 44px !important;
-      background-color: $background-input !important;
+      background-color: $white-color !important;
       font-size: 0.813em !important;
       font-weight: 500 !important;
       line-height: 18.46px !important;
@@ -18,7 +18,7 @@
       top: 5px !important;
 
       path {
-        fill: $icon-color !important;
+        fill: $white-color !important;
       }
     }
   }

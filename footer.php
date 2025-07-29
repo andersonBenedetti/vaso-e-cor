@@ -1,131 +1,93 @@
 <?php
-$footer_menu_items = [
-    ['label' => 'Sobre a Quitanda', 'url' => '/sobre-nos'],
-    ['label' => 'Entre em contato', 'url' => '/entre-em-contato'],
-    ['label' => 'Políticas de Privacidade', 'url' => '/politicas-de-privacidade'],
-    ['label' => 'Políticas de Troca e Devolução', 'url' => '/politicas-de-troca-e-devolucao'],
-    ['label' => 'Termos e Condições', 'url' => '/termos-e-condicoes'],
+$footer_menu_institucional = [
+    ['label' => 'Quem somos', 'url' => '#'],
+    ['label' => 'Seja um profissional parceiro', 'url' => '#'],
+    ['label' => 'Ferramentas', 'url' => '#'],
+    ['label' => 'Blog', 'url' => '#'],
+    ['label' => 'Fale conosco', 'url' => '#'],
+];
+
+$footer_menu_infos = [
+    ['label' => 'Manual de uso e cuidados', 'url' => '#'],
+    ['label' => 'Perguntas frequentes', 'url' => '#'],
+    ['label' => 'Políticas de privacidade', 'url' => '#'],
+    ['label' => 'Políticas de frete', 'url' => '#'],
+    ['label' => 'Trocas e devoluções', 'url' => '#'],
 ];
 ?>
 
-<footer id="footer" role="contentinfo">
+<footer id="footer">
     <div class="container">
-        <div class="content">
-            <div class="column-1">
-                <a href="/" class="logo" aria-label="Voltar para página inicial">
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-principal.svg"
-                        alt="Logo Quitanda - Voltar para página inicial" loading="lazy">
-                </a>
-                <p>CNPJ: 30.347.742/0001-59</p>
-                <a href="mailto:contato@mercadoquitanda.com.br" aria-label="Envie um email para contato"
-                    class="link">contato@mercadoquitanda.com.br</a>
-                <a href="tel:+5548991219619" aria-label="Ligar para o atendimento" class="link-number">(48)
-                    99121-9619</a>
-            </div>
+        <div class="footer-top">
+            <a href="/" class="logo" aria-label="Voltar para página inicial">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo-footer.svg"
+                    alt="Logo Vaso & Cor - Voltar para página inicial" loading="lazy" width="150" height="auto">
+            </a>
 
-            <nav aria-labelledby="footer-nav">
-                <h3 id="footer-nav">Navegue</h3>
+            <div class="links-social">
+                <a href="#" title="Siga no Instagram" target="_blank" rel="noopener noreferrer">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/icons/instagram.svg" alt="Instagram"
+                        loading="lazy" width="24" height="24">
+                </a>
+                <a href="#" title="Inscreva-se no YouTube" target="_blank" rel="noopener noreferrer">
+                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/icons/youtube.svg" alt="YouTube"
+                        loading="lazy" width="24" height="24">
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <address class="footer-column">
+                <a href="https://wa.me/554834690743" target="_blank" rel="noopener noreferrer">
+                    <span>Telefone/WhatsApp:</span>+55 (48) 3469-0743
+                </a>
+
+                <a href="mailto:faleconosco@vasoecor.com.br">
+                    <span>E-mail:</span>faleconosco@vasoecor.com.br
+                </a>
+
+                <p>
+                    <span>Horário de atendimento:</span>Segunda a sexta — 08h30 às 18h00
+                </p>
+            </address>
+
+            <nav class="footer-column" aria-labelledby="footer-institucional">
+                <h3 id="footer-institucional">Institucional</h3>
                 <ul>
                     <?php
-                    foreach ($footer_menu_items as $item) {
+                    foreach ($footer_menu_institucional as $item) {
                         echo '<li><a href="' . esc_url($item['url']) . '" aria-label="' . esc_html($item['label']) . '">' . esc_html($item['label']) . '</a></li>';
                     }
                     ?>
                 </ul>
             </nav>
 
-            <div class="infos">
-                <h3>Informações</h3>
-                <p>Endereço: </br>Rua Almirante Barroso, 535 - sala 02, Criciúma 88802-249</p>
-                <p>Horário de Atendimento: </br>Segunda à Sexta das 9h às 19h30 e Sábado das 9h às 12h</p>
-                <div class="certificates">
-                    <p>Selos e certificados:</p>
-                    <div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/produto-organico.webp"
-                            alt="Produto Orgânico Brasil" loading="lazy">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ssl.webp" alt="SSL" loading="lazy">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/ibd.webp" alt="IBD" loading="lazy">
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/glutenfree.webp" alt="Glutenfree"
-                            loading="lazy">
-                    </div>
-                </div>
-            </div>
+            <nav class="footer-column" aria-labelledby="footer-informacoes">
+                <h3 id="footer-informacoes">Informações</h3>
+                <ul>
+                    <?php
+                    foreach ($footer_menu_infos as $item) {
+                        echo '<li><a href="' . esc_url($item['url']) . '" aria-label="' . esc_html($item['label']) . '">' . esc_html($item['label']) . '</a></li>';
+                    }
+                    ?>
+                </ul>
+            </nav>
         </div>
-    </div>
 
-    <div class="bottom">
-        <p>Mercado Quitanda. Todos os direitos reservados. Desenvolvido por <a href="https://blumewebstudio.com.br/"
-                target="_blank" rel="noopener noreferrer">Blume Web Studio</a></p>
+        <div class="footer-bottom">
+            <p>Vaso e Cor. Todos os direitos reservados.</p>
+            <p>Desenvolvido por <a href="#" rel="noopener noreferrer" target="_blank">Blume Web Studio</a></p>
+        </div>
     </div>
 </footer>
 
-<a href="https://wa.me/5548991219619" class="whatsapp-float" target="_blank" aria-label="Fale conosco no WhatsApp">
+<a href="https://wa.me/554834690743" class="whatsapp-float" target="_blank" aria-label="Fale conosco no WhatsApp">
     <img src="https://cdn.jsdelivr.net/gh/rafaelbotazini/floating-whatsapp/whatsapp.svg" alt="WhatsApp" width="60"
         height="60">
 </a>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.qty-wrapper').forEach(wrapper => {
-            const minusBtn = wrapper.querySelector('.qty-btn.minus');
-            const plusBtn = wrapper.querySelector('.qty-btn.plus');
-            const input = wrapper.querySelector('.qty-input');
-
-            minusBtn.addEventListener('click', () => {
-                let value = parseInt(input.value);
-                if (value > 1) input.value = value - 1;
-            });
-
-            plusBtn.addEventListener('click', () => {
-                let value = parseInt(input.value);
-                input.value = value + 1;
-            });
-        });
-    });
-</script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".quantity").forEach(function (quantityWrapper) {
-            const input = quantityWrapper.querySelector("input.qty");
-
-            if (!input) return;
-
-            const minusButton = document.createElement("button");
-            minusButton.textContent = "-";
-            minusButton.classList.add("qty-minus");
-
-            const plusButton = document.createElement("button");
-            plusButton.textContent = "+";
-            plusButton.classList.add("qty-plus");
-
-            quantityWrapper.prepend(minusButton);
-            quantityWrapper.append(plusButton);
-
-            minusButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                let value = parseInt(input.value) || 1;
-                if (value > 1) input.value = value - 1;
-            });
-
-            plusButton.addEventListener("click", function (e) {
-                e.preventDefault();
-                let value = parseInt(input.value) || 1;
-                input.value = value + 1;
-            });
-        });
-
-        const header = document.getElementById("header");
-
-        window.addEventListener("scroll", function () {
-            if (window.scrollY > 50) {
-                header.classList.add("shrink");
-            } else {
-                header.classList.remove("shrink");
-            }
-        });
-    });
-
     const app = new Vue({
         el: '#app',
         data: {
@@ -139,6 +101,7 @@ $footer_menu_items = [
 </div>
 <script src="<?php echo get_template_directory_uri(); ?>/js/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/slider.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 
 <?php wp_footer(); ?>
 </body>
