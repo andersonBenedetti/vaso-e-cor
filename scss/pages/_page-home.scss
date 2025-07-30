@@ -146,4 +146,115 @@
       }
     }
   }
+
+  .format-carousel {
+    padding: 50px 0;
+
+    .swiper-slide {
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+
+      @media (max-width: 768px) {
+        height: 230px;
+      }
+
+      &:hover {
+        img {
+          transform: scale(1.1);
+        }
+
+        .btn {
+          transform: scale(1.1);
+        }
+      }
+
+      img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        object-fit: cover;
+        object-position: bottom center;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.4s ease;
+
+        @media (max-width: 768px) {
+          display: block;
+        }
+      }
+
+      .format-infos {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+
+        .swiper-pagination {
+          position: relative !important;
+          top: auto;
+          bottom: auto;
+          left: auto;
+          transform: none;
+        }
+
+        h3 {
+          @include title-format;
+          color: $primaryCream;
+        }
+
+        .btn {
+          background-color: $primaryCream;
+          color: $black;
+          transition: transform 0.4s ease;
+        }
+      }
+    }
+
+    .all-main-carousel {
+      position: relative;
+      display: none;
+
+      @media (max-width: 768px) {
+        display: block;
+      }
+
+      .swiper-slide {
+        @media (max-width: 768px) {
+          height: 440px;
+        }
+
+        .format-infos {
+          position: absolute;
+          bottom: 50px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 9;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          .swiper-pagination {
+            position: relative !important;
+            top: auto;
+            bottom: auto;
+            left: auto;
+            transform: none;
+          }
+
+          h3 {
+            @include title-format;
+            color: $primaryCream;
+          }
+        }
+      }
+    }
+  }
 }
