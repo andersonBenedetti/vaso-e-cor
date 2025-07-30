@@ -766,6 +766,44 @@ ul {
   line-height: 1;
   color: #fffef7;
 }
+#pg-home .section-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+#pg-home .section-creative {
+  background-image: url("./img/casacor.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 760px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  position: relative;
+}
+#pg-home .section-creative .container {
+  position: absolute;
+  width: 100%;
+  bottom: -130px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 768px) {
+  #pg-home .section-creative .container {
+    bottom: -170px;
+  }
+}
+#pg-home .section-creative .container .title-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  #pg-home .section-creative {
+    height: 400px;
+  }
+}
 
 #archive-product .intro {
   background-color: #fbf5f1;

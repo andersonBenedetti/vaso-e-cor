@@ -257,4 +257,44 @@
       }
     }
   }
+
+  .section-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+  }
+
+  .section-creative {
+    background-image: url("./img/casacor.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 760px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    position: relative;
+
+    .container {
+      position: absolute;
+      width: 100%;
+      bottom: -130px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      @media (max-width: 768px) {
+        bottom: -170px;
+      }
+
+      .title-section {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 768px) {
+      height: 400px;
+    }
+  }
 }
