@@ -64,3 +64,9 @@ $font-primary: "Inter", sans-serif;
     font-size: 1.4375em;
   }
 }
+
+@mixin title-format {
+  font-weight: 600;
+  font-size: 1.5em;
+  line-height: 1;
+}
