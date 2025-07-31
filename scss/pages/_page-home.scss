@@ -266,35 +266,118 @@
   }
 
   .section-creative {
-    background-image: url("./img/casacor.webp");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 760px;
-    margin-top: 50px;
-    margin-bottom: 100px;
-    position: relative;
+    .creative-top {
+      position: relative;
 
-    .container {
-      position: absolute;
-      width: 100%;
-      bottom: -130px;
-      left: 50%;
-      transform: translateX(-50%);
+      .img {
+        width: 100%;
+        object-fit: cover;
 
-      @media (max-width: 768px) {
-        bottom: -170px;
+        @media (max-width: 768px) {
+          display: block;
+          min-height: 400px;
+        }
       }
 
-      .title-section {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+      .container {
+        position: absolute;
+        width: 100%;
+        bottom: -130px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @media (max-width: 768px) {
+          bottom: -170px;
+        }
+
+        .title-section {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 768px) {
+        height: 400px;
       }
     }
 
-    @media (max-width: 768px) {
-      height: 400px;
+    .creative-bottom {
+      position: relative;
+      margin-top: 200px;
+      margin-bottom: 100px;
+      padding-top: 100px;
+      width: 100%;
+
+      @media (max-width: 1024px) {
+        padding-top: 0;
+      }
+
+      .creative-content {
+        max-width: 360px;
+
+        @media (max-width: 1024px) {
+          max-width: 100%;
+        }
+
+        p {
+          @include text-medium;
+          text-align: justify;
+          margin-bottom: 150px;
+
+          @media (max-width: 1024px) {
+            margin-bottom: 50px;
+          }
+        }
+      }
+
+      .img-bottom {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+
+        @media (max-width: 1024px) {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          width: 100%;
+          height: auto;
+        }
+
+        @media (max-width: 768px) {
+          display: block;
+        }
+      }
+
+      .btn {
+        &.mbl {
+          display: none;
+          margin: 100px auto 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+          &.dkt {
+            display: none;
+          }
+
+          &.mbl {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    .swiper-pagination {
+      width: max-content;
+      bottom: 215px;
+
+      @media (max-width: 1024px) {
+        width: 100%;
+        bottom: 185px;
+      }
     }
   }
 }

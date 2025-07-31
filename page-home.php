@@ -5,23 +5,34 @@
 <?php get_header(); ?>
 
 <?php
-$menu_fav = [
-    ['label' => 'Bolonha', 'url' => '#', 'img' => 'bolonha.webp'],
-    ['label' => 'Pote', 'url' => '#', 'img' => 'pote.webp'],
-    ['label' => 'Nácar', 'url' => '#', 'img' => 'nacar.webp'],
-    ['label' => 'Bolonha', 'url' => '#', 'img' => 'bolonha.webp'],
-    ['label' => 'Pote', 'url' => '#', 'img' => 'pote.webp'],
-    ['label' => 'Nácar', 'url' => '#', 'img' => 'nacar.webp'],
-];
+$parent_cat = get_term_by('slug', 'formatos', 'product_cat');
 
-$formats = [
-    ['label' => 'Curvilíneo', 'url' => '#', 'img' => 'curvilineo.webp'],
-    ['label' => 'Redondo', 'url' => '#', 'img' => 'redondo.webp'],
-    ['label' => 'Curvilíneo', 'url' => '#', 'img' => 'curvilineo.webp'],
-    ['label' => 'Redondo', 'url' => '#', 'img' => 'redondo.webp'],
-    ['label' => 'Curvilíneo', 'url' => '#', 'img' => 'curvilineo.webp'],
-    ['label' => 'Redondo', 'url' => '#', 'img' => 'redondo.webp'],
-];
+$formats = [];
+
+if ($parent_cat) {
+    $child_ids = get_term_children($parent_cat->term_id, 'product_cat');
+
+    if (!empty($child_ids)) {
+        $categories = get_terms([
+            'taxonomy' => 'product_cat',
+            'include' => $child_ids,
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'hide_empty' => false,
+        ]);
+
+        foreach ($categories as $cat) {
+            $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
+            $image_url = wp_get_attachment_url($thumbnail_id);
+
+            $formats[] = [
+                'label' => $cat->name,
+                'url' => get_term_link($cat),
+                'img' => $image_url ?: 'placeholder.jpg',
+            ];
+        }
+    }
+}
 ?>
 
 <main id="pg-home" role="main">
@@ -66,7 +77,7 @@ $formats = [
         <div class="swiper-pagination" aria-hidden="true"></div>
     </section>
 
-    <section class="cat-carousel swiper" role="region" aria-label="Galeria de categorias de produtos favoritos">
+    <section class="cat-carousel swiper" role="region" aria-label="Galeria de produtos favoritos">
         <div class="container">
             <h2 class="title-section">
                 Favoritos
@@ -74,28 +85,56 @@ $formats = [
         </div>
 
         <div class="swiper-wrapper">
-            <?php foreach ($menu_fav as $item):
-                $img_url = get_stylesheet_directory_uri() . '/img/' . $item['img'];
-                $label = esc_html($item['label']);
-                ?>
+            <?php
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_visibility',
+                        'field' => 'name',
+                        'terms' => 'featured',
+                        'operator' => 'IN',
+                    ),
+                ),
+            );
 
-                <a class="swiper-slide" href="<?php echo esc_url($item['url']); ?>"
-                    aria-label="Ver produto <?php echo esc_attr($label); ?>">
-                    <h3><?php echo esc_html($label); ?></h3>
-                    <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($label); ?>" loading="lazy"
-                        width="400" height="auto">
-                    <p class="btn-cat">
-                        <span>Ver mais</span>
-                        <svg width="4" height="8" viewBox="0 0 4 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M3.65855 4.35581L0.830047 7.18431L0.123047 6.47731L2.59805 4.00231L0.123047 1.52731L0.830047 0.820312L3.65855 3.64881C3.75228 3.74258 3.80494 3.86973 3.80494 4.00231C3.80494 4.13489 3.75228 4.26205 3.65855 4.35581Z"
-                                fill="black" />
-                        </svg>
-                    </p>
-                </a>
+            $featured_query = new WP_Query($args);
 
-            <?php endforeach; ?>
+            if ($featured_query->have_posts()):
+                while ($featured_query->have_posts()):
+                    $featured_query->the_post();
+                    global $product;
+                    $product_id = $product->get_id();
+                    $label = get_the_title();
+                    $permalink = get_permalink();
+                    $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium');
+                    ?>
+                    <a class="swiper-slide" href="<?php echo esc_url($permalink); ?>"
+                        aria-label="Ver produto <?php echo esc_attr($label); ?>">
+                        <h3><?php echo esc_html($label); ?></h3>
+                        <?php if ($image): ?>
+                            <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr($label); ?>" loading="lazy"
+                                width="400" height="auto">
+                        <?php endif; ?>
+                        <p class="btn-cat">
+                            <span>Ver mais</span>
+                            <svg width="4" height="8" viewBox="0 0 4 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M3.65855 4.35581L0.830047 7.18431L0.123047 6.47731L2.59805 4.00231L0.123047 1.52731L0.830047 0.820312L3.65855 3.64881C3.75228 3.74258 3.80494 3.86973 3.80494 4.00231C3.80494 4.13489 3.75228 4.26205 3.65855 4.35581Z"
+                                    fill="black" />
+                            </svg>
+                        </p>
+                    </a>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            else:
+                echo '<p>Não há produtos em destaque no momento.</p>';
+            endif;
+            ?>
         </div>
+
 
         <div class="swiper-pagination black" aria-hidden="true"></div>
     </section>
@@ -132,35 +171,34 @@ $formats = [
 
     <section class="format-carousel swiper">
         <div class="swiper-wrapper">
-            <?php foreach ($formats as $index => $format): ?>
+            <div class="swiper-slide">
+                <div class="main-carousel swiper">
+                    <div class="format-infos">
+                        <h3>Todos os formatos</h3>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="swiper-wrapper">
+                        <?php foreach ($formats as $f): ?>
+                            <div class="swiper-slide">
+                                <a href="<?php echo esc_url($f['url']); ?>">
+                                    <img src="<?php echo esc_url($f['img']); ?>" alt="<?php echo esc_attr($f['label']); ?>">
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <?php foreach ($formats as $format): ?>
                 <div class="swiper-slide">
-                    <?php if ($index === 0): ?>
-                        <div class="main-carousel swiper">
-                            <div class="format-infos">
-                                <h3>Todos os formatos</h3>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div class="swiper-wrapper"> <?php foreach ($formats as $f): ?>
-                                    <div class="swiper-slide">
-                                        <a href="<?php echo esc_url($f['url']); ?>">
-                                            <img src="<?php echo get_stylesheet_directory_uri() . '/img/' . esc_attr($f['img']); ?>"
-                                                alt="Formato <?php echo esc_attr($f['label']); ?>">
-                                        </a>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                            <div class="swiper-pagination"></div>
+                    <a href="<?php echo esc_url($format['url']); ?>">
+                        <img src="<?php echo esc_url($format['img']); ?>" alt="<?php echo esc_attr($format['label']); ?>">
+                        <div class="format-infos">
+                            <h3><?php echo esc_html($format['label']); ?></h3>
+                            <span class="btn">Ver mais</span>
                         </div>
-                    <?php else: ?>
-                        <a class="swiper-slide" href="<?php echo esc_url($format['url']); ?>">
-                            <img src="<?php echo get_stylesheet_directory_uri() . '/img/' . esc_attr($format['img']); ?>"
-                                alt="Formato <?php echo esc_attr($format['label']); ?>">
-                            <div class="format-infos">
-                                <h3><?php echo esc_html($format['label']); ?></h3>
-                                <span class="btn">Ver mais</span>
-                            </div>
-                        </a>
-                    <?php endif; ?>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -170,7 +208,7 @@ $formats = [
                 <?php foreach ($formats as $format): ?>
                     <div class="swiper-slide">
                         <a href="<?php echo esc_url($format['url']); ?>">
-                            <img src="<?php echo get_stylesheet_directory_uri() . '/img/' . esc_attr($format['img']); ?>"
+                            <img src="<?php echo esc_url($format['img']); ?>"
                                 alt="Formato <?php echo esc_attr($format['label']); ?>">
                             <div class="format-infos">
                                 <h3><?php echo esc_html($format['label']); ?></h3>
@@ -192,15 +230,80 @@ $formats = [
     </section>
 
     <section class="section-creative">
-        <div class="container">
-            <h2 class="title-section">
-                <span>arquitetos</span>
-                <span>e</span>
-                <span>paisagistas</span>
-                <span>criadores parceiros</span>
-            </h2>
+        <div class="swiper main-carousel">
+            <div class="swiper-wrapper">
+
+                <?php
+                $args = [
+                    'post_type' => 'criadores-parceiros',
+                    'posts_per_page' => -1,
+                    'post_status' => 'publish',
+                    'order' => 'DESC',
+                ];
+                $query = new WP_Query($args);
+
+                if ($query->have_posts()):
+                    while ($query->have_posts()):
+                        $query->the_post();
+
+                        $imagem_do_topo = get_field('imagem_do_topo');
+                        $texto = get_field('texto');
+                        $imagem_lateral = get_field('imagem_lateral');
+                        $title = get_the_title();
+                        ?>
+                        <div class="swiper-slide creative-slide">
+                            <div class="creative-top">
+                                <?php if ($imagem_do_topo): ?>
+                                    <img class="img" src="<?php echo esc_url($imagem_do_topo); ?>"
+                                        alt="<?php echo esc_attr("$title – imagem do topo"); ?>" loading="lazy" />
+                                <?php endif; ?>
+
+                                <div class="container">
+                                    <h2 class="title-section">
+                                        <span>arquitetos</span>
+                                        <span>e</span>
+                                        <span>paisagistas</span>
+                                        <span>criadores parceiros</span>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="creative-bottom">
+                                <div class="container">
+                                    <div class="creative-content">
+                                        <?php if ($texto): ?>
+                                            <p><?php echo wp_kses_post($texto); ?></p>
+                                        <?php else: ?>
+                                            <p>Sem texto cadastrado.</p>
+                                        <?php endif; ?>
+
+                                        <a class="btn dkt" href="#">Seja um parceiro</a>
+                                    </div>
+                                </div>
+                                <?php if ($imagem_lateral): ?>
+                                    <img class="img-bottom" src="<?php echo esc_url($imagem_lateral); ?>"
+                                        alt="<?php echo esc_attr("$title – imagem lateral"); ?>" loading="lazy" />
+                                <?php endif; ?>
+
+                                <a class="btn mbl" href="#">Seja um parceiro</a>
+                            </div>
+                        </div>
+                        <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else:
+                    ?>
+                    <p>Nenhum parceiro encontrado.</p>
+                <?php endif; ?>
+
+            </div>
+
+            <div class="container" style="position: relative;">
+                <div class="swiper-pagination black" aria-hidden="true"></div>
+            </div>
         </div>
     </section>
+
 
 </main>
 

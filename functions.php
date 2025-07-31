@@ -53,10 +53,12 @@ function vaso_e_cor_product_list($products)
         <li class="product-item">
             <form class="product-form" method="post" action="">
                 <a href="<?= esc_url($product['link']); ?>">
-                    <div class="product-info">
+                    <div class=" product-info">
                         <img src="<?= esc_url($product['img']); ?>" alt="<?= esc_attr($product['name']); ?>" />
                         <h3><?= esc_html($product['name']); ?></h3>
-                        <p class="product-price"><?= $product['price']; ?></p>
+                        <p class=" product-price">
+                            <?= $product['price']; ?>
+                        </p>
                     </div>
                 </a>
 
@@ -114,6 +116,7 @@ function custom_post_type($post_type, $singular_name, $plural_name)
 
 add_action('init', function () {
     custom_post_type('carrossel', 'Carrossel', 'Carrossel');
+    custom_post_type('criadores-parceiros', 'Carrossel parceiros', 'Carrossel parceiros');
 });
 
 add_filter('woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby', 20);
@@ -169,3 +172,6 @@ function custom_woocommerce_get_catalog_ordering_args($args)
     }
     return $args;
 }
+
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);

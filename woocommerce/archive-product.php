@@ -41,21 +41,21 @@
   </section>
 
   <?php
-	$products = [];
-	if (have_posts()) {
-	  while (have_posts()) {
-		the_post();
-		$product = wc_get_product(get_the_ID());
+  $products = [];
+  if (have_posts()) {
+    while (have_posts()) {
+      the_post();
+      $product = wc_get_product(get_the_ID());
 
-		if (!current_user_can('administrator')) {
-		  if ($product && $product->get_status() !== 'publish') {
-			continue; // pula produto privado
-		  }
-		}
+      if (!current_user_can('administrator')) {
+        if ($product && $product->get_status() !== 'publish') {
+          continue;
+        }
+      }
 
-		$products[] = $product;
-	  }
-	}
+      $products[] = $product;
+    }
+  }
 
   $data = [];
   $data['products'] = format_products($products);
@@ -100,7 +100,7 @@
   <section class="products-store container">
     <?php if (!empty($data['products'][0])) { ?>
       <div>
-        <?php quitanda_product_list($data['products']); ?>
+        <?php vaso_e_cor_product_list($data['products']); ?>
         <?= get_the_posts_pagination(); ?>
       </div>
     </section>
