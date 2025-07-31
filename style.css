@@ -425,6 +425,10 @@ ul {
   border-radius: 0;
   background-color: #000000;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .dgwt-wcas-search-wrapp {
@@ -772,17 +776,20 @@ ul {
   align-items: center;
   padding: 50px 0;
 }
-#pg-home .section-creative {
-  background-image: url("./img/casacor.webp");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 760px;
-  margin-top: 50px;
-  margin-bottom: 100px;
+#pg-home .section-creative .creative-top {
   position: relative;
 }
-#pg-home .section-creative .container {
+#pg-home .section-creative .creative-top .img {
+  width: 100%;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  #pg-home .section-creative .creative-top .img {
+    display: block;
+    min-height: 400px;
+  }
+}
+#pg-home .section-creative .creative-top .container {
   position: absolute;
   width: 100%;
   bottom: -130px;
@@ -790,18 +797,94 @@ ul {
   transform: translateX(-50%);
 }
 @media (max-width: 768px) {
-  #pg-home .section-creative .container {
+  #pg-home .section-creative .creative-top .container {
     bottom: -170px;
   }
 }
-#pg-home .section-creative .container .title-section {
+#pg-home .section-creative .creative-top .container .title-section {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 @media (max-width: 768px) {
-  #pg-home .section-creative {
+  #pg-home .section-creative .creative-top {
     height: 400px;
+  }
+}
+#pg-home .section-creative .creative-bottom {
+  position: relative;
+  margin-top: 200px;
+  margin-bottom: 100px;
+  padding-top: 100px;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .creative-bottom {
+    padding-top: 0;
+  }
+}
+#pg-home .section-creative .creative-bottom .creative-content {
+  max-width: 360px;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .creative-bottom .creative-content {
+    max-width: 100%;
+  }
+}
+#pg-home .section-creative .creative-bottom .creative-content p {
+  font-weight: 500;
+  font-size: 1.125em;
+  line-height: 26px;
+  text-align: justify;
+  margin-bottom: 150px;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .creative-bottom .creative-content p {
+    margin-bottom: 50px;
+  }
+}
+#pg-home .section-creative .creative-bottom .img-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .creative-bottom .img-bottom {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  #pg-home .section-creative .creative-bottom .img-bottom {
+    display: block;
+  }
+}
+#pg-home .section-creative .creative-bottom .btn.mbl {
+  display: none;
+  margin: 100px auto 0 auto;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .creative-bottom .btn.dkt {
+    display: none;
+  }
+  #pg-home .section-creative .creative-bottom .btn.mbl {
+    display: flex;
+  }
+}
+#pg-home .section-creative .swiper-pagination {
+  width: max-content;
+  bottom: 215px;
+}
+@media (max-width: 1024px) {
+  #pg-home .section-creative .swiper-pagination {
+    width: 100%;
+    bottom: 185px;
   }
 }
 
