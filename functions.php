@@ -33,15 +33,17 @@ function format_products($products)
 {
     $products_final = [];
     foreach ($products as $product) {
+        $image = wp_get_attachment_image_src($product->get_image_id());
         $products_final[] = [
             'id' => $product->get_id(),
             'name' => $product->get_name(),
-            'img' => wp_get_attachment_image_src($product->get_image_id())[0],
+            'img' => $image ? $image[0] : '',
             'link' => $product->get_permalink(),
         ];
     }
     return $products_final;
 }
+
 
 function vaso_e_cor_product_list($products)
 {

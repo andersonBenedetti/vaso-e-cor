@@ -1,0 +1,37 @@
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-conteudo {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.popup-conteudo img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+}
+
+.popup .fechar {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #fff;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
