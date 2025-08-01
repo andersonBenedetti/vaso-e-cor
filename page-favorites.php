@@ -43,18 +43,18 @@ $formatted_products = format_products($products);
 
 <main id="archive-product">
 
-  <section class="section-intro">
-    <div class="container">
-      <h1>Favoritos</h1>
-    </div>
-  </section>
+    <section class="section-intro">
+        <div class="container">
+            <h1>Favoritos</h1>
+        </div>
+    </section>
 
-  <section class="section-filters">
-    <div class="container">
-      <div class="filters-content">
-        <div class="filters-left">
-          <div class="custom-select">
-            <?php
+    <section class="section-filters">
+        <div class="container">
+            <div class="filters-content">
+                <div class="filters-left">
+                    <div class="custom-select">
+                        <?php
             $product_categories = get_categories(array(
               'taxonomy' => 'product_cat',
               'hide_empty' => false,
@@ -69,10 +69,10 @@ $formatted_products = format_products($products);
               echo '</select>';
             }
             ?>
-          </div>
+                    </div>
 
-          <div class="custom-select">
-            <?php
+                    <div class="custom-select">
+                        <?php
             $acabamentos = get_terms(array(
               'taxonomy' => 'pa_acabamento',
               'hide_empty' => false,
@@ -88,10 +88,10 @@ $formatted_products = format_products($products);
               echo '</select>';
             }
             ?>
-          </div>
+                    </div>
 
-          <div class="custom-select">
-            <?php
+                    <div class="custom-select">
+                        <?php
             $cores = get_terms(array(
               'taxonomy' => 'pa_cor',
               'hide_empty' => false,
@@ -107,11 +107,11 @@ $formatted_products = format_products($products);
               echo '</select>';
             }
             ?>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="custom-select">
-          <?php
+                <div class="custom-select">
+                    <?php
           $orderby_options = apply_filters(
             'woocommerce_catalog_orderby',
             array(
@@ -141,37 +141,37 @@ $formatted_products = format_products($products);
 
           echo '</select>';
           ?>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="products-store">
-    <div class="container">
+    <section class="products-store">
+        <div class="container">
 
-      <?php if (!empty($formatted_products)): ?>
-        <?php vaso_e_cor_product_list($formatted_products); ?>
+            <?php if (!empty($formatted_products)): ?>
+            <?php vaso_e_cor_product_list($formatted_products); ?>
 
-        <div class="pagination">
-          <?php
+            <div class="pagination">
+                <?php
           echo paginate_links(array(
             'total' => $featured_query->max_num_pages,
             'current' => $paged,
           ));
           ?>
+            </div>
+
+            <?php else: ?>
+            <section class="no-results">
+                <div class="container">
+                    <p>Nenhum resultado encontrado.</p>
+                    <p>Confira outras categorias ou redefina os filtros para encontrar o produto ideal.</p>
+                </div>
+            </section>
+            <?php endif; ?>
+
         </div>
-
-      <?php else: ?>
-        <section class="no-results">
-          <div class="container">
-            <p>Nenhum resultado encontrado.</p>
-            <p>Confira outras categorias ou redefina os filtros para encontrar o produto ideal.</p>
-          </div>
-        </section>
-      <?php endif; ?>
-
-    </div>
-  </section>
+    </section>
 
 </main>
 
