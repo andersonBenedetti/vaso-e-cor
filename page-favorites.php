@@ -1,26 +1,51 @@
-<?php get_header(); ?>
+<?php
+// Template Name: Página de Favoritos
+get_header();
+?>
 
 <?php
 global $wp_query;
-echo paginate_links(array(
-  'total' => $wp_query->max_num_pages,
-  'current' => max(1, get_query_var('paged')),
-));
+
+$paged = get_query_var('paged') ? get_query_var('paged') : 1;
+
+$args = array(
+  'post_type' => 'product',
+  'posts_per_page' => -1,
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'product_visibility',
+      'field' => 'name',
+      'terms' => 'featured',
+      'operator' => 'IN',
+    ),
+  ),
+);
+
+$featured_query = new WP_Query($args);
+$products = [];
+
+if ($featured_query->have_posts()) {
+  while ($featured_query->have_posts()) {
+    $featured_query->the_post();
+    $product = wc_get_product(get_the_ID());
+
+    if (!current_user_can('administrator') && $product && $product->get_status() !== 'publish') {
+      continue;
+    }
+
+    $products[] = $product;
+  }
+  wp_reset_postdata();
+}
+
+$formatted_products = format_products($products);
 ?>
 
 <main id="archive-product">
 
   <section class="section-intro">
     <div class="container">
-      <h1>
-        <?php
-        if (is_shop()) {
-          echo 'Loja';
-        } else {
-          single_cat_title();
-        }
-        ?>
-      </h1>
+      <h1>Favoritos</h1>
     </div>
   </section>
 
@@ -42,8 +67,6 @@ echo paginate_links(array(
                 echo '<option value="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . '</option>';
               }
               echo '</select>';
-            } else {
-              echo '<p>Não foram encontradas categorias de produtos.</p>';
             }
             ?>
           </div>
@@ -126,29 +149,16 @@ echo paginate_links(array(
   <section class="products-store">
     <div class="container">
 
-      <?php
-      $products = [];
-      if (have_posts()) {
-        while (have_posts()) {
-          the_post();
-          $product = wc_get_product(get_the_ID());
-
-          if (!current_user_can('administrator') && $product && $product->get_status() !== 'publish') {
-            continue;
-          }
-
-          $products[] = $product;
-        }
-      }
-
-      $formatted_products = format_products($products);
-      ?>
-
       <?php if (!empty($formatted_products)): ?>
         <?php vaso_e_cor_product_list($formatted_products); ?>
 
         <div class="pagination">
-          <?php woocommerce_pagination(); ?>
+          <?php
+          echo paginate_links(array(
+            'total' => $featured_query->max_num_pages,
+            'current' => $paged,
+          ));
+          ?>
         </div>
 
       <?php else: ?>

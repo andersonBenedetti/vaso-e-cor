@@ -24,8 +24,9 @@ register_nav_menus([
 
 function vaso_e_cor_loop_shop_per_page()
 {
-    return 30;
+    return 9;
 }
+
 add_filter('loop_shop_per_page', 'vaso_e_cor_loop_shop_per_page');
 
 function format_products($products)
@@ -37,7 +38,6 @@ function format_products($products)
             'name' => $product->get_name(),
             'img' => wp_get_attachment_image_src($product->get_image_id())[0],
             'link' => $product->get_permalink(),
-            'price' => $product->get_price_html(),
         ];
     }
     return $products_final;
@@ -47,31 +47,12 @@ function vaso_e_cor_product_list($products)
 {
     echo '<ul class="products-list">';
     foreach ($products as $product) {
-        $product_obj = wc_get_product($product['id']);
-        $product_id = $product_obj->get_id();
         ?>
         <li class="product-item">
-            <form class="product-form" method="post" action="">
-                <a href="<?= esc_url($product['link']); ?>">
-                    <div class=" product-info">
-                        <img src="<?= esc_url($product['img']); ?>" alt="<?= esc_attr($product['name']); ?>" />
-                        <h3><?= esc_html($product['name']); ?></h3>
-                        <p class=" product-price">
-                            <?= $product['price']; ?>
-                        </p>
-                    </div>
-                </a>
-
-                <div class="product-actions">
-                    <div class="qty-wrapper">
-                        <button type="button" class="qty-btn minus">-</button>
-                        <input type="number" name="quantity" value="1" min="1" class="qty-input" />
-                        <button type="button" class="qty-btn plus">+</button>
-                    </div>
-                    <input type="hidden" name="add-to-cart" value="<?= esc_attr($product_id); ?>" />
-                    <button type="submit" class="btn btn-product ajax_add_to_cart">Adicionar ao carrinho</button>
-                </div>
-            </form>
+            <a href="<?= esc_url($product['link']); ?>" class="product-link">
+                <img src="<?= esc_url($product['img']); ?>" alt="<?= esc_attr($product['name']); ?>" />
+                <h3><?= esc_html($product['name']); ?></h3>
+            </a>
         </li>
         <?php
     }
@@ -123,21 +104,15 @@ add_filter('woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby', 
 add_filter('woocommerce_default_catalog_orderby_options', 'custom_woocommerce_catalog_orderby', 20);
 function custom_woocommerce_catalog_orderby($sortby)
 {
-    // Adiciona os rótulos personalizados
     $sortby['bestsellers'] = 'Mais vendidos';
     $sortby['discount'] = 'Desconto';
     $sortby['name_asc'] = 'Nome (A–Z)';
     $sortby['name_desc'] = 'Nome (Z–A)';
 
-    // Organiza tudo na ordem desejada
     $ordered = array(
         'menu_order' => 'Ordenação padrão',
         'popularity' => 'Relevância',
-        'bestsellers' => 'Mais vendidos',
         'date' => 'Mais recentes',
-        'discount' => 'Desconto',
-        'price-desc' => 'Preço: Do maior para o menor',
-        'price' => 'Preço: Do menor para o maior',
         'name_asc' => 'Nome em ordem crescente',
         'name_desc' => 'Nome em ordem decrescente',
     );
