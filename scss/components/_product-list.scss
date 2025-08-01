@@ -1,0 +1,38 @@
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4em 1em;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3em 1em;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 2em 0;
+  }
+
+  .product-item a {
+    display: block;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: 377px;
+      max-height: 462px;
+      object-fit: cover;
+      border: 1px solid $border-product;
+      margin: 0 auto;
+    }
+
+    h3 {
+      @include text-medium;
+      color: $black;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 1em 0;
+    }
+  }
+}
