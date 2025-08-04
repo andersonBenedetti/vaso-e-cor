@@ -3,11 +3,203 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
+    padding-bottom: 50px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(1, 1fr);
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 20px;
+    }
 
     .product-detail {
       .detail-content {
         border: 1px solid $border-cat;
         padding: 50px;
+        margin-bottom: 50px;
+
+        @media (max-width: 1024px) {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+
+        h1 {
+          @include title-format;
+          margin-bottom: 20px;
+        }
+
+        .short-description {
+          @include text-small;
+          line-height: 1.5;
+          color: $text-description;
+          margin-bottom: 30px;
+        }
+
+        .list-acabamentos {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 20px;
+
+          a {
+            background-color: transparent;
+            border: 1px solid $black;
+            color: $black;
+          }
+        }
+
+        .variations_form {
+          .label {
+            display: none;
+          }
+
+          .reset_variations {
+            display: block;
+            margin: 20px 0;
+            @include text-small;
+            color: $black;
+          }
+        }
+
+        .btn-details {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px;
+
+          .btn-whatsapp {
+            gap: 5px;
+            background-color: $btn-whats;
+            text-transform: uppercase;
+            height: 55px;
+            padding: 0 50px;
+          }
+
+          .btn-3d {
+            width: 45px;
+            height: 45px;
+            padding: 5px;
+
+            &:hover img {
+              transform: scale(1.1);
+            }
+
+            img {
+              width: 100%;
+              object-fit: contain;
+              transition: transform 0.3s ease;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .related-list {
+    .product-link {
+      display: block;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-width: 377px;
+        max-height: 462px;
+        object-fit: cover;
+        border: 1px solid $border-product;
+        margin: 0 auto;
+      }
+
+      h3 {
+        @include text-medium;
+        color: $black;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 1em 0;
+      }
+    }
+  }
+
+  .cross-sell-products {
+    background-color: $black;
+    padding: 100px 0;
+
+    @media (max-width: 1024px) {
+      padding: 50px 0;
+    }
+
+    .content-cross {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+
+      @media (max-width: 1024px) {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .text {
+        max-width: 305px;
+
+        @media (max-width: 1024px) {
+          text-align: center;
+        }
+
+        h2,
+        p {
+          color: $white;
+        }
+
+        h2 {
+          max-width: 270px;
+          @include text-list;
+          line-height: 1.2;
+          margin-bottom: 20px;
+
+          @media (max-width: 1024px) {
+            max-width: 100%;
+          }
+        }
+
+        p {
+          line-height: 24px;
+        }
+      }
+      .product-link {
+        img {
+          background-color: $white;
+        }
+
+        h3 {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .upsell-products {
+    margin: 100px 0;
+
+    @media (max-width: 1024px) {
+      margin: 50px 0;
+    }
+
+    h2 {
+      @include text-list;
+      margin-bottom: 20px;
+
+      @media (max-width: 1024px) {
+        text-align: center;
+      }
+    }
+
+    .btn {
+      margin-top: 50px;
+
+      @media (max-width: 1024px) {
+        margin: 20px auto 0 auto;
       }
     }
   }

@@ -48,43 +48,41 @@ echo paginate_links(array(
             ?>
           </div>
 
-          <div class="custom-select">
-            <?php
-            $acabamentos = get_terms(array(
-              'taxonomy' => 'pa_acabamento',
-              'hide_empty' => false,
-            ));
+          <?php
+          $acabamentos = get_terms(array(
+            'taxonomy' => 'pa_acabamento',
+            'hide_empty' => false,
+          ));
 
-            if (!empty($acabamentos) && !is_wp_error($acabamentos)) {
-              echo '<select class="acabamento-select" onchange="location = this.value;">';
-              echo '<option value="">Filtre por Acabamento</option>';
-              foreach ($acabamentos as $acabamento) {
-                $url = add_query_arg('filter_acabamento', $acabamento->slug, get_permalink(wc_get_page_id('shop')));
-                echo '<option value="' . esc_url($url) . '">' . esc_html($acabamento->name) . '</option>';
-              }
-              echo '</select>';
+          if (!empty($acabamentos) && !is_wp_error($acabamentos)) {
+            echo '<div class="custom-select">';
+            echo '<select class="acabamento-select" onchange="location = this.value;">';
+            echo '<option value="">Filtre por Acabamento</option>';
+            foreach ($acabamentos as $acabamento) {
+              $url = add_query_arg('filter_acabamento', $acabamento->slug, get_permalink(wc_get_page_id('shop')));
+              echo '<option value="' . esc_url($url) . '">' . esc_html($acabamento->name) . '</option>';
             }
-            ?>
-          </div>
+            echo '</select>';
+            echo '</div>';
+          }
 
-          <div class="custom-select">
-            <?php
-            $cores = get_terms(array(
-              'taxonomy' => 'pa_cor',
-              'hide_empty' => false,
-            ));
+          $cores = get_terms(array(
+            'taxonomy' => 'pa_cor',
+            'hide_empty' => false,
+          ));
 
-            if (!empty($cores) && !is_wp_error($cores)) {
-              echo '<select class="cor-select" onchange="location = this.value;">';
-              echo '<option value="">Filtre por Cor</option>';
-              foreach ($cores as $cor) {
-                $url = add_query_arg('filter_cor', $cor->slug, get_permalink(wc_get_page_id('shop')));
-                echo '<option value="' . esc_url($url) . '">' . esc_html($cor->name) . '</option>';
-              }
-              echo '</select>';
+          if (!empty($cores) && !is_wp_error($cores)) {
+            echo '<div class="custom-select">';
+            echo '<select class="cor-select" onchange="location = this.value;">';
+            echo '<option value="">Filtre por Cor</option>';
+            foreach ($cores as $cor) {
+              $url = add_query_arg('filter_cor', $cor->slug, get_permalink(wc_get_page_id('shop')));
+              echo '<option value="' . esc_url($url) . '">' . esc_html($cor->name) . '</option>';
             }
-            ?>
-          </div>
+            echo '</select>';
+            echo '</div>';
+          }
+          ?>
         </div>
 
         <div class="custom-select">
