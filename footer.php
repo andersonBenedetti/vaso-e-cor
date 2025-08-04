@@ -109,6 +109,7 @@ $footer_menu_infos = [
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/slider.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/popup.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/toggle.js"></script>
 
 <?php wp_footer(); ?>
 </body>

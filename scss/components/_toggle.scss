@@ -1,0 +1,102 @@
+.abas-btns {
+  display: flex;
+  flex-direction: column;
+
+  .toggle-content {
+    border-bottom: 1px solid $black;
+
+    &:first-child {
+      border-top: 1px solid $black;
+    }
+
+    .toggle-btn {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border: 0;
+      background: none;
+      @include btn-cat;
+      color: $black;
+      text-transform: uppercase;
+
+      img {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      &.ativo img {
+        transform: rotate(-180deg);
+      }
+    }
+
+    .tab-content {
+      display: none;
+      padding: 0 20px 20px 20px;
+      color: $text-description;
+      flex-direction: column;
+      gap: 20px;
+
+      &.ativo {
+        display: flex;
+      }
+
+      h2,
+      h3 {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      p {
+        line-height: 24px;
+      }
+
+      a {
+        color: $text-description;
+        text-decoration: underline;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $black;
+        }
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      ul,
+      ol {
+        padding-left: 20px;
+      }
+
+      li {
+        line-height: 1.5;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      em {
+        font-style: italic;
+      }
+
+      &#medidas {
+        gap: 5px;
+
+        a {
+          display: block;
+          font-size: 14px;
+          font-weight: 400;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}

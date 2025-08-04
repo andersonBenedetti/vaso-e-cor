@@ -66,4 +66,34 @@ document.addEventListener("DOMContentLoaded", function () {
       clickable: true,
     },
   });
+
+  const crossSellCarousel = new Swiper(".cross-sell-carousel", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+    },
+  });
+
+  const upsellCarousel = new Swiper(".upsell-carousel", {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3,
+      },
+    },
+  });
 });

@@ -57,6 +57,10 @@
       align-items: center;
       gap: 50px;
 
+      @media (max-width: 1024px) {
+        gap: 0;
+      }
+
       .menu-header {
         .btn-menu {
           display: flex;
